@@ -1,0 +1,11 @@
+package packagetoupdate;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication(scanBasePackages = {"packagetoscan"})
+public class nametoupdateApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(nametoupdateApplication.class, args);
+    }
+}
