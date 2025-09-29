@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.main.Main;
-
 import com.chubb.location.library.interfaces.SoapClientInterface;
 import com.ksquare.archetype_creation.utils.Constants;
 
@@ -34,7 +31,7 @@ public class BPELToCamelGenerator {
         System.out.println("---> requestName : " + requestName);
         
         String outputName = BPELParser.extractOutputsName(bpelFilePath);
-        System.out.println("---> outputName : " + outputName);
+        //System.out.println("---> outputName : " + outputName);
         
         try {
             // Load the class by name
@@ -42,7 +39,7 @@ public class BPELToCamelGenerator {
 
             // Create a new instance (assumes a no-arg constructor)
             Object instance = clazz.getDeclaredConstructor().newInstance();
-            System.out.println("---> instance : " + instance);
+            //System.out.println("---> instance : " + instance);
             
             //String xsdClass = "../" + wsOriginalName + "/" + requestName + ".xsd";
             String xsdClass = BpelUtils.getBpelLocationFormat(wsOriginalName, requestName);
@@ -53,31 +50,33 @@ public class BPELToCamelGenerator {
             String fullyQualifiedClass = BpelUtils.getBpelFullQualifiedPojo(namespaceToClass, requestName);
             System.out.println("----> fullyQualifiedClass : " + fullyQualifiedClass);
             bpelObjectsMap.put(Constants.INPUT_POJOCLASS, fullyQualifiedClass);
-            
+            /*
             Class<?> clazzReq = Class.forName(fullyQualifiedClass);
                     
             // Create a new instance (assumes a no-arg constructor)
             Object instanceReq = clazzReq.getDeclaredConstructor().newInstance();
             System.out.println("---> instanceReq : " + instanceReq);
             
-            String xsdClassOutput = BpelUtils.getBpelLocationFormat(wsOriginalName, outputName);
-            System.out.println("-----> xsdClassOutput : " + xsdClassOutput);
-            String namespaceToOutputClass = BPELParser.extractXsdName(bpelFilePath, xsdClassOutput);
-            System.out.println("-----> namespaceToOutputClass : " + namespaceToOutputClass);
-            String fullyQualifiedOutputClass = BpelUtils.getBpelFullQualifiedPojo(namespaceToOutputClass, outputName);
-            System.out.println("----> fullyQualifiedOutputClass : " + fullyQualifiedOutputClass);
-            bpelObjectsMap.put(Constants.OUTPUT_POJOCLASS, fullyQualifiedOutputClass);
-            
-            Class<?> clazzRes = Class.forName(fullyQualifiedOutputClass);
+            if (outputName != null) {
+                String xsdClassOutput = BpelUtils.getBpelLocationFormat(wsOriginalName, outputName);
+                System.out.println("-----> xsdClassOutput : " + xsdClassOutput);
+                String namespaceToOutputClass = BPELParser.extractXsdName(bpelFilePath, xsdClassOutput);
+                System.out.println("-----> namespaceToOutputClass : " + namespaceToOutputClass);
+                String fullyQualifiedOutputClass = BpelUtils.getBpelFullQualifiedPojo(namespaceToOutputClass, outputName);
+                //System.out.println("----> fullyQualifiedOutputClass : " + fullyQualifiedOutputClass);
+                bpelObjectsMap.put(Constants.OUTPUT_POJOCLASS, fullyQualifiedOutputClass);
+                
+                Class<?> clazzRes = Class.forName(fullyQualifiedOutputClass);
 
-            // Create a new instance (assumes a no-arg constructor)
-            Object instanceRes = clazzRes.getDeclaredConstructor().newInstance();
-            System.out.println("---> instanceRes : " + instanceRes);
+                // Create a new instance (assumes a no-arg constructor)
+                Object instanceRes = clazzRes.getDeclaredConstructor().newInstance();
+                //System.out.println("---> instanceRes : " + instanceRes);
 
-            if (instance instanceof SoapClientInterface) {
-            	instanceRes = ((SoapClientInterface) instance).invokeService(instanceReq);
-            	System.out.println("---> final instanceRes : " + instanceRes);
-            }
+                if (instance instanceof SoapClientInterface) {
+                	instanceRes = ((SoapClientInterface) instance).invokeService(instanceReq);
+                	//System.out.println("---> final instanceRes : " + instanceRes);
+                }            	
+            }*/
 
         } catch (ClassNotFoundException |
                  InstantiationException |
@@ -87,33 +86,6 @@ public class BPELToCamelGenerator {
             e.printStackTrace();
         }
         
-        Main main = new Main();
-        main.configure().addRoutesBuilder(new RouteBuilder() {
-            @Override
-            public void configure() {
-            	System.out.println("-> BPELToCamelGenerator.configure");
-            	
-                for (String invoke : invokes) {
-                	System.out.println("-> invoke : " + invoke);
-                    String[] parts = invoke.split("\\.");
-                    System.out.println("-> parts : " + parts);
-                    
-                    String partner = parts[0];
-                    String operation = parts[1];
-                    
-                    System.out.println("--> timer://" + operation + "?repeatCount=1");
-                    System.out.println("--> setBody : " + "Calling " + operation + " on " + partner);
-                    System.out.println("--> to : " + "log:" + operation);
-
-                    from("timer://" + operation + "?repeatCount=1")
-                        .setBody(constant("Calling " + operation + " on " + partner))
-                        .to("log:" + operation);
-                }
-            }
-        });
-        
         return bpelObjectsMap;
-
-        //main.run();
     }
 }

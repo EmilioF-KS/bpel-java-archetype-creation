@@ -38,7 +38,7 @@ public class BPELParser {
                 //System.out.println("--> import.namespace: " + namespace);
                 //System.out.println();
                 
-                if (originalXsdName.equals(location)) {
+                if (originalXsdName.contains(location)) {
                 	xsdName = namespace;
                 }
             }
@@ -159,10 +159,10 @@ public class BPELParser {
                 String id = receiveElement.getAttribute("wpc:id");
                 String transactionalBehavior = receiveElement.getAttribute("wpc:transactionalBehavior");
                 
-                //System.out.println("-> receive.createInstance: " + createInstance);
-                //System.out.println("-> receive.name: " + name);
-                //System.out.println("-> receive.operation: " + operation);
-                //System.out.println("-> receive.partnerLink: " + partnerLink);
+                System.out.println("----> receive.createInstance: " + createInstance);
+                System.out.println("----> receive.name: " + name);
+                System.out.println("----> receive.operation: " + operation);
+                System.out.println("----> receive.partnerLink: " + partnerLink);
                 //System.out.println("-> receive.portType: " + portType);
                 //System.out.println("-> receive.displayName: " + displayName);
                 //System.out.println("-> receive.id: " + id);
@@ -190,6 +190,47 @@ public class BPELParser {
                     }
                 }
         }
+        
+        NodeList onMessageNodes = doc.getElementsByTagName("bpws:onMessage");
+        for (int i = 0; i < onMessageNodes.getLength(); i++) {
+        	
+            Node onMessageNode = onMessageNodes.item(i);
+
+            if (onMessageNode.getNodeType() == Node.ELEMENT_NODE) {
+            	Element onMessageElement = (Element) onMessageNode;
+            	
+            	String operation = onMessageElement.getAttribute("operation");
+                String partnerLink = onMessageElement.getAttribute("partnerLink");
+                String portType = onMessageElement.getAttribute("portType");
+                String id = onMessageElement.getAttribute("wpc:id");
+                
+                System.out.println("----> onMessageElement.operation: " + operation);
+                System.out.println("----> onMessageElement.partnerLink: " + partnerLink);
+                //System.out.println("-> onMessageElement.portType: " + portType);
+                //System.out.println("-> onMessageElement.id: " + id);
+                
+                // Get the input element
+                NodeList outputList = onMessageElement.getElementsByTagName("wpc:output");
+                if (outputList.getLength() > 0) {
+                    Element outputElement = (Element) outputList.item(0);
+
+                    // Get the value element inside body
+                        NodeList parameterList = outputElement.getElementsByTagName("wpc:parameter");
+                        if (parameterList.getLength() > 0) {
+                            Element parameterElement = (Element) parameterList.item(0);
+                            String parametername = parameterElement.getAttribute("name");
+                            String parametervariable = parameterElement.getAttribute("variable");
+                            
+                            //System.out.println("-> onMessageElement.output.name: " + parametername);
+                            //System.out.println("-> onMessageElement.output.variable: " + parametervariable);
+                            
+                            if (wsOriginalName.equals(partnerLink) && wsName == null) {
+                            	wsName = parametername;
+                            }
+                        }
+                    }
+                }
+        }
 	        
         return wsName;
     }
@@ -205,7 +246,7 @@ public class BPELParser {
         Document doc = builder.parse(newFile);
                 
         NodeList invokeNodes = doc.getElementsByTagName("bpws:invoke");
-        System.out.println("-> invokeNodes : " + invokeNodes);
+        //System.out.println("-> invokeNodes : " + invokeNodes);
         
         for (int i = 0; i < invokeNodes.getLength(); i++) {
             Node invokeNode = invokeNodes.item(i);

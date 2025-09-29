@@ -1,6 +1,9 @@
 package com.ksquare.archetype_creation;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -17,11 +20,67 @@ public class MicroserviceGenerator {
 	private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MicroserviceGenerator.class);
 
     public static void main(String[] args) {
-    	LOGGER.debug("-> MicroserviceGenerator");
-        JSONParser parser = new JSONParser();
+    	LOGGER.info("-> MicroserviceGenerator");
+    	
+    	InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+
+    	System.out.print("Please enter your LOC type: ");
+    	
+    	String locType = null;
+    	/*
+    	try {
+            // Read a line of text from the console
+    		locType = br.readLine();
+        } catch (IOException e) {
+            System.err.println("Error reading input: " + e.getMessage());
+        } finally {
+            // Close the BufferedReader to release system resources
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                System.err.println("Error closing BufferedReader: " + e.getMessage());
+            }
+        }*/
+    	
+    	locType = "LOC3X1";
+    	
+        String COMPLETE_PATH = null;
+        String bpelFileName = null;
         
-        String COMPLETE_PATH = "C:\\CHUBB\\LocationServices\\LOC2X3\\";
-    	String bpelFileName = "AddressStandardizationLOC2X3Process";
+        if ("LOC3X1".equalsIgnoreCase(locType)) {
+            //LOC3X1
+        	LOGGER.info("Processing LOC3X1.....");
+        	
+            COMPLETE_PATH = "C:\\CHUBB\\LocationServices\\";
+        	bpelFileName = "LocationRetrievalLOC3X1Process"; 
+        	
+        } else if ("LOC3X2".equalsIgnoreCase(locType)) {
+            //LOC3X2
+        	LOGGER.info("Processing LOC3X2.....");
+        	
+        	COMPLETE_PATH = "C:\\CHUBB\\LocationServices\\";
+        	bpelFileName = "LocationRetrievalLOC3X2Process";        	
+        } else if ("LOC3X3".equalsIgnoreCase(locType)) {
+            //LOC3X3
+        	LOGGER.info("Processing LOC3X3.....");
+        	
+        	COMPLETE_PATH = "C:\\CHUBB\\LocationServices\\LOC3X3\\";
+        	bpelFileName = "LocationRetrievalLOC3X3Process";        	
+        } if ("LOC3X4".equalsIgnoreCase(locType)) {
+            //LOC3X4
+        	LOGGER.info("Processing LOC3X4.....");
+        	
+        	COMPLETE_PATH = "C:\\CHUBB\\LocationServices\\LOC3X4\\";
+        	bpelFileName = "LocationRetrievalLOC3X4Process";        	
+        } 
+        
+        //COMPLETE_PATH = "C:\\CHUBB\\LocationServices\\";
+    	//bpelFileName = "LocationRetrievalLOC3X1Process";        
+        
+        JSONParser parser = new JSONParser();
         
         try (FileReader reader = new FileReader(SERVICE_SPEC_PATH)) {
         	// Parse the JSON file
@@ -34,16 +93,16 @@ public class MicroserviceGenerator {
             String serviceName = (String) jsonObject.get("serviceName");
             String packageBase = (String) jsonObject.get("packageBase");
             
-            LOGGER.debug("serviceName: " + serviceName);
-            LOGGER.debug("packageBase: " + packageBase);
+            //LOGGER.info("serviceName: " + serviceName);
+            //LOGGER.info("packageBase: " + packageBase);
             
             Map<String, String> bpelObjectsMap = BPELToCamelGenerator.bpeljavacreate(COMPLETE_PATH, bpelFileName + Constants.BPEL_EXT);
-            LOGGER.debug("bpelObjectsMap: " + bpelObjectsMap);
+            //LOGGER.info("bpelObjectsMap: " + bpelObjectsMap);
             
             boolean created = CreateFolderUtil.createNewFolder(bpelFileName.toLowerCase(), 
             		"com." + bpelFileName.toLowerCase() + ".webservice",
             		bpelObjectsMap);
-            LOGGER.debug("created: " + created);
+            LOGGER.info("created: " + created);
         } catch (Exception e) {
             e.printStackTrace();
         }

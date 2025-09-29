@@ -51,7 +51,7 @@ public class CreateFolderUtil {
 
             // Create a single directory
             if (newFolderSrc.mkdir()) {
-                System.out.println("src directory created: " + newFolderSrc.getAbsolutePath());
+                //System.out.println("src directory created: " + newFolderSrc.getAbsolutePath());
                 successSrc = true;
             } else {
                 System.out.println("Failed to create src directory or it already exists.");
@@ -61,7 +61,7 @@ public class CreateFolderUtil {
 
             // Create a single directory
             if (newFolderLib.mkdir()) {
-                System.out.println("LIBS directory created: " + newFolderLib.getAbsolutePath());
+                //System.out.println("LIBS directory created: " + newFolderLib.getAbsolutePath());
                 successLib = true;
             } else {
                 System.out.println("Failed to create LIBS directory or it already exists.");
@@ -73,7 +73,7 @@ public class CreateFolderUtil {
 
             // Create a single directory
             if (newFolderMain.mkdir()) {
-                System.out.println("main directory created: " + newFolderMain.getAbsolutePath());
+                //System.out.println("main directory created: " + newFolderMain.getAbsolutePath());
                 successMain = true;
             } else {
                 System.out.println("Failed to create main directory or it already exists.");
@@ -85,7 +85,7 @@ public class CreateFolderUtil {
 
             // Create a single directory
             if (newFolderResources.mkdir()) {
-                System.out.println("resources directory created: " + newFolderResources.getAbsolutePath());
+                //System.out.println("resources directory created: " + newFolderResources.getAbsolutePath());
                 
                 ResourceCopierUtil.copyResourceToFile("/resources/application.yml", newFolderResources +
                 		SEPARATOR + "application-" + folderName + ".yml");
@@ -99,7 +99,7 @@ public class CreateFolderUtil {
 
             // Create a single directory
             if (newFolderJava.mkdir()) {
-                System.out.println("java directory created: " + newFolderJava.getAbsolutePath());
+                //System.out.println("java directory created: " + newFolderJava.getAbsolutePath());
                 successJava = true;
             } else {
                 System.out.println("Failed to create java directory or it already exists.");
@@ -108,75 +108,75 @@ public class CreateFolderUtil {
     	
         if (successJava) {
         	String projectPathNew = packageBase.replace(".", SEPARATOR);
-        	System.out.println("projectPathNew: " + projectPathNew);
+        	//System.out.println("projectPathNew: " + projectPathNew);
         	
         	File newFolderProjectPath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew);
 
             // Create a single directory
             if (newFolderProjectPath.mkdirs()) {
-                System.out.println("ProjectPath directory created: " + newFolderProjectPath.getAbsolutePath());
+                //System.out.println("ProjectPath directory created: " + newFolderProjectPath.getAbsolutePath());
                 successProjectPath = true;
                 
                 File newFolderProjectControllerPath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + "controller");
                 
                 if (newFolderProjectControllerPath.mkdirs()) {
-                    System.out.println("controller directory created: " + newFolderProjectControllerPath.getAbsolutePath());
+                    //System.out.println("controller directory created: " + newFolderProjectControllerPath.getAbsolutePath());
                     
                 } else {
-                    System.out.println("Failed to create controller directory or it already exists.");
+                    //System.out.println("Failed to create controller directory or it already exists.");
                 }
                 
                 File newFolderProjectDtoPath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + "dto");
                 
                 if (newFolderProjectDtoPath.mkdirs()) {
-                    System.out.println("dto directory created: " + newFolderProjectDtoPath.getAbsolutePath());
+                    //System.out.println("dto directory created: " + newFolderProjectDtoPath.getAbsolutePath());
                     
                 } else {
-                    System.out.println("Failed to create dto directory or it already exists.");
+                    //System.out.println("Failed to create dto directory or it already exists.");
                 }
                 
                 File newFolderProjectEntityPath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + "entity");
                 
                 if (newFolderProjectEntityPath.mkdirs()) {
-                    System.out.println("entity directory created: " + newFolderProjectEntityPath.getAbsolutePath());
+                    //System.out.println("entity directory created: " + newFolderProjectEntityPath.getAbsolutePath());
                     
                 } else {
-                    System.out.println("Failed to create entity directory or it already exists.");
+                    //System.out.println("Failed to create entity directory or it already exists.");
                 }
                 
                 File newFolderProjectRepositoryPath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + "repository");
                 
                 if (newFolderProjectRepositoryPath.mkdirs()) {
-                    System.out.println("repository directory created: " + newFolderProjectRepositoryPath.getAbsolutePath());
+                    //System.out.println("repository directory created: " + newFolderProjectRepositoryPath.getAbsolutePath());
                     
                 } else {
-                    System.out.println("Failed to create repository directory or it already exists.");
+                    //System.out.println("Failed to create repository directory or it already exists.");
                 }
                 
                 File newFolderProjectServicePath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + "service");
                 
                 if (newFolderProjectServicePath.mkdirs()) {
-                    System.out.println("service directory created: " + newFolderProjectServicePath.getAbsolutePath());
+                    //System.out.println("service directory created: " + newFolderProjectServicePath.getAbsolutePath());
                     
                 } else {
-                    System.out.println("Failed to create service directory or it already exists.");
+                    //System.out.println("Failed to create service directory or it already exists.");
                 }
                 
                 File newFolderProjNamec = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew + SEPARATOR + folderName);
 
                 // Create a single directory
                 if (newFolderProjNamec.mkdir()) {
-                    System.out.println("ProjName directory created: " + newFolderProjNamec.getAbsolutePath());
+                    //System.out.println("ProjName directory created: " + newFolderProjNamec.getAbsolutePath());
                     successSrc = true;
                 } else {
-                    System.out.println("Failed to create ProjName directory or it already exists.");
+                    //System.out.println("Failed to create ProjName directory or it already exists.");
                 }
-                
+                /*
                 ResourceCopierUtil.copyResourceToFile("/resources/Application", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + folderName + SEPARATOR + folderName.substring(0, 1).toUpperCase() +
                 		folderName.substring(1, folderName.length()) + "Application.java");
@@ -199,11 +199,12 @@ public class CreateFolderUtil {
                    		"nametoupdate", 
                    		folderName.substring(0, 1).toUpperCase() +
                    			folderName.substring(1, folderName.length()));
-                System.out.println("Application File Updated...........");
+                   			*/
+                //System.out.println("Application File Updated...........");
 
-                System.out.println("Controller File to Update..........." + FULL_JAVA_PATH + "-" + projectPathNew +
-                		"-" + "controller" + "-" + folderName.substring(0, 1).toUpperCase() +
-                		folderName.substring(1, folderName.length()) + "Controller.java");
+                //System.out.println("Controller File to Update..........." + FULL_JAVA_PATH + "-" + projectPathNew +
+                	//	"-" + "controller" + "-" + folderName.substring(0, 1).toUpperCase() +
+                		//folderName.substring(1, folderName.length()) + "Controller.java");
                 //Updating Controller
                 ResourceCopierUtil.copyResourceToFile("/resources/Controller", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
                 		SEPARATOR + "controller" + SEPARATOR + folderName.substring(0, 1).toUpperCase() +
@@ -234,16 +235,19 @@ public class CreateFolderUtil {
                    		"inputclasstoupdate", 
                    		bpelObjectsMap.get(Constants.INPUT_POJOCLASS));
                 
-                TextFileModificationProgramUtil.modifyFile(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
-                   		SEPARATOR + "controller" + SEPARATOR + folderName.substring(0, 1).toUpperCase() +
-                   		folderName.substring(1, folderName.length()) + "Controller.java", 
-                   		"outputclasstoupdate", 
-                   		bpelObjectsMap.get(Constants.OUTPUT_POJOCLASS));
+                if (bpelObjectsMap.get(Constants.OUTPUT_POJOCLASS) != null) {
+                    TextFileModificationProgramUtil.modifyFile(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                       		SEPARATOR + "controller" + SEPARATOR + folderName.substring(0, 1).toUpperCase() +
+                       		folderName.substring(1, folderName.length()) + "Controller.java", 
+                       		"outputclasstoupdate", 
+                       		bpelObjectsMap.get(Constants.OUTPUT_POJOCLASS));
+                	
+                }
                    			
-                System.out.println("Controller File Updated...........");
+                //System.out.println("Controller File Updated...........");
 
                 //Copying Gradle files
-                System.out.println("Copying Gradle Files...........");
+                //System.out.println("Copying Gradle Files...........");
                 
                 ResourceCopierUtil.copyResourceToFile("/resources/build.gradle", 
                 		FOLDER_PATH + folderName + SEPARATOR + "build.gradle");
@@ -257,57 +261,132 @@ public class CreateFolderUtil {
                 ResourceCopierUtil.copyResourceToFile("/resources/settings.gradle", 
                 		FOLDER_PATH + folderName + SEPARATOR + "settings.gradle");
                 
-                ResourceCopierUtil.copyResourceToFile("/resources/xsd-javapojos-0.0.1-SNAPSHOT.jar", 
-                		FOLDER_PATH + folderName + SEPARATOR + LIBS + SEPARATOR + "xsd-javapojos-0.0.1-SNAPSHOT.jar");
+                ResourceCopierUtil.copyResourceToFile("/resources/xsd-javapojos-0.0.3-SNAPSHOT.jar", 
+                		FOLDER_PATH + folderName + SEPARATOR + LIBS + SEPARATOR + "xsd-javapojos-0.0.3-SNAPSHOT.jar");
                 
                 ResourceCopierUtil.copyResourceToFile("/resources/soap-clients-0.0.1-SNAPSHOT.jar", 
                 		FOLDER_PATH + folderName + SEPARATOR + LIBS + SEPARATOR + "soap-clients-0.0.1-SNAPSHOT.jar");
-                
-                //Copying Web Services files
-                System.out.println("Copying Web Services Files...........");
-                System.out.println(FULL_JAVA_PATH + SEPARATOR + projectPathNew + SEPARATOR);
-                
-                //ResourceCopierUtil.copyDirectory(IMPORTED_WS_PATH, 
-                	//	FULL_JAVA_PATH + SEPARATOR + projectPathNew + SEPARATOR);
-                
-                //Generating Mappings
-                /*try {
-					MappingGenerator.generateMappingClasses(projectPathNew.replace("\\", ".") + "." + "mapping");
-					//MappingGenerator.generateMappingClasses("com.mapping");
-				} catch (ClassNotFoundException | JAXBException | CannotCompileException | NotFoundException
-						| IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
 
-				//DecompilerRunner.generateMappingSources(projectPathNew + SEPARATOR + "mapping");
+                ////////////////////////LOC3X1
+                File newFolderProjectUtilsPath = new File(FULL_JAVA_PATH + SEPARATOR + 
+                		"com" + SEPARATOR +
+                		"chubb" + SEPARATOR + 
+                		"converter" + SEPARATOR + 
+                		"util");
                 
-                ////////////////////////
-                //String mappingFilesPath = DecompilerRunner.OUTPUT_SOURCE_PATH + SEPARATOR + projectPathNew + SEPARATOR + "mapping";
-                		
-                //System.out.println("...................mapping path " + mappingFilesPath);
-                /*
-                List<String> fileNames = Files.list(Paths.get(mappingFilesPath))
-                        .filter(Files::isRegularFile)
-                        .map(Path::getFileName)
-                        .map(Path::toString)
-                        .collect(Collectors.toList());
+                if (newFolderProjectUtilsPath.mkdirs()) {
+                    System.out.println("repository directory created: " + newFolderProjectRepositoryPath.getAbsolutePath());
+                    
+                } else {
+                    System.out.println("Failed to create repository directory or it already exists.");
+                }
                 
-                //System.out.println("...................fileNames " + fileNames);
-                for (String fileName : fileNames) {
-                	//System.out.println("...................fileName " + fileName);
-                	
-                	if (fileName.contains("Transformer")) {
-                		TextFileModificationProgramUtil.modifyFile(mappingFilesPath + SEPARATOR + fileName, 
-                           		"Transformer ", 
-                           		"Transformer extends Address ");//TODO remove hardcode
-                	}
-                }*/
-                ////////////////////////
+                File newConfigFolderProjNamec = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew + SEPARATOR + folderName +
+                		SEPARATOR + "config");
 
-                ResourceCopierUtil.copyDirectory(DecompilerRunner.OUTPUT_SOURCE_PATH, 
-                		FULL_JAVA_PATH + SEPARATOR);
-                System.out.println("Mapping Files copied successfully!");
+                // Create a single directory
+                if (newConfigFolderProjNamec.mkdir()) {
+                    //System.out.println("Config directory created: " + newFolderProjNamec.getAbsolutePath());
+                } else {
+                    //System.out.println("Failed to create ProjName directory or it already exists.");
+                }
+                
+                File newRouteFolderProjNamec = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew + SEPARATOR + folderName +
+                		SEPARATOR + "routes");
+
+                // Create a single directory
+                if (newRouteFolderProjNamec.mkdir()) {
+                    //System.out.println("Config directory created: " + newFolderProjNamec.getAbsolutePath());
+                } else {
+                    //System.out.println("Failed to create ProjName directory or it already exists.");
+                }
+
+                File newFolderProjectModelPath = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "model");
+                
+                if (newFolderProjectModelPath.mkdirs()) {
+                    //System.out.println("controller directory created: " + newFolderProjectControllerPath.getAbsolutePath());
+                    
+                } else {
+                    //System.out.println("Failed to create controller directory or it already exists.");
+                }
+                                
+                File newServiceFolderProjName = new File(FULL_JAVA_PATH + SEPARATOR + projectPathNew + 
+                		SEPARATOR + "service" + SEPARATOR + "mfc");
+
+                // Create a single directory
+                if (newServiceFolderProjName.mkdir()) {
+                    //System.out.println("Config directory created: " + newFolderProjNamec.getAbsolutePath());
+                } else {
+                    //System.out.println("Failed to create ProjName directory or it already exists.");
+                }
+
+                ResourceCopierUtil.copyResourceToFile("/resources/GetStateOrProvinceResponse",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"GetStateOrProvinceResponse.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/MapperUtility",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"MapperUtility.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/XmlParser",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"XmlParser.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/XmlParserXpathGetCountry",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"XmlParserXpathGetCountry.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/XmlParserXpathGetStateOrProvince",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"XmlParserXpathGetStateOrProvince.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/XmlParserXpathRand",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"XmlParserXpathRand.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/XmlParserXpathLocation",  
+                		newFolderProjectUtilsPath + SEPARATOR + 
+                		"XmlParserXpathLocation.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/LocationRetrievalApplication", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + folderName + SEPARATOR + "LocationRetrievalApplication.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/LocationController", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "controller" + SEPARATOR + "LocationController.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/CamelConfig", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + folderName + SEPARATOR + "config" + SEPARATOR + "CamelConfig.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/LocationRetrievalRoute", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + folderName + SEPARATOR + "routes" + SEPARATOR + "LocationRetrievalRoute.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/Location", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "model" + SEPARATOR + "Location.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/LocationReply", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "model" + SEPARATOR + "LocationReply.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/StateOrProvinceBack", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "model" + SEPARATOR + "StateOrProvinceBack.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/LocationRequest", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "model" + SEPARATOR + "LocationRequest.java");
+                
+                ResourceCopierUtil.copyResourceToFile("/resources/ValidationService", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "ValidationService.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/EnrichmentService", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "EnrichmentService.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/FireDistrictService", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "FireDistrictService.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/LocationListReplyService", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "LocationListReplyService.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/MappingService", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "MappingService.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/RansService", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "RansService.java");
+                ResourceCopierUtil.copyResourceToFile("/resources/OutputTerminalTypeFinder", FULL_JAVA_PATH + SEPARATOR + projectPathNew +
+                		SEPARATOR + "service" + SEPARATOR + "mfc" + SEPARATOR + "OutputTerminalTypeFinder.java");
+                ////////////////////////LOC3X1
+
+                System.out.println("Spring Boot Project copied successfully!");
                 
             } else {
                 System.out.println("Failed to create ProjectPath directory or it already exists.");

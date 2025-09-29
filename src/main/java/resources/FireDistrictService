@@ -1,0 +1,27 @@
+package com.locationretrievalloc3x1process.webservice.service;
+
+import org.springframework.stereotype.Service;
+
+import com.locationretrievalloc3x1process.webservice.model.Location;
+import com.locationretrievalloc3x1process.webservice.model.LocationReply;
+
+@Service
+public class FireDistrictService {
+	private static final String MISSING_ADDRESS_LINE_1_FOR_FIREDISTRICTCODE = "Missing Address Line 1 for FireDistrictCode";
+	
+    public void checkAndWarn(com.chubb.xsd.ei.location.locationlistreplyloc3x1b.LocationListReply reply) {
+    	System.out.println("-> FireDistrictService.checkAndWarn ");
+    	System.out.println(": reply : " + reply);
+    	//System.out.println(": reply.getLocations : " + reply.getLocations());
+    	/*
+        for (com.chubb.xsd.ei.location.locationx5.Location loc : reply.getLocations()) {
+        	System.out.println("--> loc.getFireDistrictCode : " + loc.getFireDistrictCode());
+        	
+            if ("9999".equalsIgnoreCase(loc.getFireDistrictCode())) {
+                loc.setFireDistrictCode("");
+                System.out.println("--> " + MISSING_ADDRESS_LINE_1_FOR_FIREDISTRICTCODE);
+                reply.addWarning("EPLOC30002", MISSING_ADDRESS_LINE_1_FOR_FIREDISTRICTCODE);
+            }
+        }*/
+    }
+}

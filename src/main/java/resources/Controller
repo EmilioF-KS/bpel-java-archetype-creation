@@ -30,16 +30,23 @@ public class nametoupdateController {
 	        Object instanceReq = clazzReq.getDeclaredConstructor().newInstance();
 	        LOGGER.debug("instanceReq : " + instanceReq);
 	            
-	    	Class<?> clazzRes = Class.forName("outputclasstoupdate");
-	
-	        // Create a new instance (assumes a no-arg constructor)
-	        Object instanceRes = clazzRes.getDeclaredConstructor().newInstance();
-	        LOGGER.debug("instanceRes : " + instanceRes);
-	
-	        if (instance instanceof SoapClientInterface) {
-	          	instanceRes = ((SoapClientInterface) instance).invokeService(instanceReq);
-	           	LOGGER.debug("final instanceRes : " + instanceRes);
-	        }
+	        if ("outputclasstoupdate".contains("com.")) {
+		        Class<?> clazzRes = Class.forName("outputclasstoupdate");
+		
+		        // Create a new instance (assumes a no-arg constructor)
+		        Object instanceRes = clazzRes.getDeclaredConstructor().newInstance();
+		        LOGGER.debug("instanceRes : " + instanceRes);
+		
+		        if (instance instanceof SoapClientInterface) {
+		          	instanceRes = ((SoapClientInterface) instance).invokeService(instanceReq);
+		           	LOGGER.debug("final instanceRes : " + instanceRes);
+		        }
+	        } else {
+		        if (instance instanceof SoapClientInterface) {
+		          	((SoapClientInterface) instance).invokeService(instanceReq);
+		        }
+	        }    
+	    	
 	    } catch (ClassNotFoundException |
                  InstantiationException |
                  IllegalAccessException |

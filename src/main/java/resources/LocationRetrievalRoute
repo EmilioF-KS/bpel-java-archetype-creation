@@ -1,0 +1,42 @@
+package com.locationretrievalloc3x1process.webservice.locationretrievalloc3x1process.routes;
+
+import java.util.Set;
+
+import org.apache.camel.CamelContext;
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LocationRetrievalRoute extends RouteBuilder {
+    @Override
+    public void configure() {
+    	from("direct:locationProcess")
+            .routeId("LocationRetrievalLOC3X1Process")
+            .log("Start Process")
+            .bean("validationService", "validate")
+            .log("Log LOC3X1B Request")
+            .choice()
+                .when(method("enrichmentService", "needsStateEnrichment"))
+                    .to("bean:enrichmentService?method=enrichState")
+                    .log("SOAP Response: ${body}")
+                .when(method("enrichmentService", "needsCountryEnrichment"))
+                    .to("bean:enrichmentService?method=enrichCountry")
+            .end()
+            .to("bean:mappingService?method=transform")
+            .bean("fireDistrictService", "checkAndWarn")
+            .log("Log LOC3X1B Reply")
+            .log("End Process");
+    }
+
+	@Override
+	public void addTemplatedRoutesToCamelContext(CamelContext context) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Set<String> updateRoutesToCamelContext(CamelContext context) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 public class ResourceCopierUtil {
 
     public static void copyResourceToFile(String resourcePath, String targetFilePath) throws IOException {
+    	//System.out.println("resourcePath: " + resourcePath);
         try (InputStream inputStream = ResourceCopierUtil.class.getResourceAsStream(resourcePath);
              OutputStream outputStream = new FileOutputStream(targetFilePath)) {
 

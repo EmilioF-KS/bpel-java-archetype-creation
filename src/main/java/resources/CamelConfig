@@ -1,0 +1,30 @@
+package com.locationretrievalloc3x1process.webservice.locationretrievalloc3x1process.config;
+
+import org.apache.camel.CamelContext;
+import org.apache.camel.ProducerTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class CamelConfig {
+
+	@Autowired
+	private CamelContext camelContext;
+	
+    @Bean
+    public ProducerTemplate producerTemplate() throws Exception {
+    	System.out.println("-> Instanciating ProducerTemplate");
+        return camelContext.createProducerTemplate();
+    }
+    
+    @Bean
+    public ApplicationRunner runner() {
+        return args -> {
+            System.out.println("Registered routes:");
+            camelContext.getRoutes().forEach(route -> System.out.println(route.getId()));
+        };
+    }
+
+}
